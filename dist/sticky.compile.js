@@ -39,7 +39,8 @@ var Sticky = /*#__PURE__*/function () {
       marginBottom: options.marginBottom || 0,
       stickyFor: options.stickyFor || 0,
       stickyClass: options.stickyClass || null,
-      stickyContainer: options.stickyContainer || 'body'
+      stickyContainer: options.stickyContainer || 'body',
+      skipVPHeightCheck: options.skipVPHeightCheck || false
     };
     this.updateScrollTopPosition = this.updateScrollTopPosition.bind(this);
     this.updateScrollTopPosition();
@@ -90,9 +91,9 @@ var Sticky = /*#__PURE__*/function () {
       element.sticky.stickyFor = parseInt(element.getAttribute('data-sticky-for')) || this.options.stickyFor;
       element.sticky.stickyClass = element.getAttribute('data-sticky-class') || this.options.stickyClass;
       element.sticky.wrap = element.hasAttribute('data-sticky-wrap') ? true : this.options.wrap; // @todo attribute for stickyContainer
-      // element.sticky.stickyContainer = element.getAttribute('data-sticky-container') || this.options.stickyContainer;
 
-      element.sticky.stickyContainer = this.options.stickyContainer;
+      element.sticky.stickyContainer = element.getAttribute('data-sticky-container') || this.options.stickyContainer;
+      element.sticky.skipVPHeightCheck = element.hasAttribute('data-sticky-skip-vp-height-check') ? true : this.options.skipVPHeightCheck;
       element.sticky.container = this.getStickyContainer(element);
       element.sticky.container.rect = this.getRectangle(element.sticky.container);
       element.sticky.rect = this.getRectangle(element); // fix when element is image that has not yet loaded and width, height = 0
@@ -257,7 +258,7 @@ var Sticky = /*#__PURE__*/function () {
         left: ''
       });
 
-      if (this.vp.height < element.sticky.rect.height || !element.sticky.active) {
+      if (!element.sticky.skipVPHeightCheck && this.vp.height < element.sticky.rect.height || !element.sticky.active) {
         return;
       }
 

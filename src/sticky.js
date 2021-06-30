@@ -34,6 +34,7 @@ class Sticky {
       stickyFor: options.stickyFor || 0,
       stickyClass: options.stickyClass || null,
       stickyContainer: options.stickyContainer || 'body',
+      skipVPHeightCheck: options.skipVPHeightCheck || false,
     };
 
     this.updateScrollTopPosition = this.updateScrollTopPosition.bind(this);
@@ -81,8 +82,8 @@ class Sticky {
     element.sticky.stickyClass = element.getAttribute('data-sticky-class') || this.options.stickyClass;
     element.sticky.wrap = element.hasAttribute('data-sticky-wrap') ? true : this.options.wrap;
     // @todo attribute for stickyContainer
-    // element.sticky.stickyContainer = element.getAttribute('data-sticky-container') || this.options.stickyContainer;
-    element.sticky.stickyContainer = this.options.stickyContainer;
+    element.sticky.stickyContainer = element.getAttribute('data-sticky-container') || this.options.stickyContainer;
+    element.sticky.skipVPHeightCheck = element.hasAttribute('data-sticky-skip-vp-height-check') ? true : this.options.skipVPHeightCheck;
 
     element.sticky.container = this.getStickyContainer(element);
     element.sticky.container.rect = this.getRectangle(element.sticky.container);
@@ -237,7 +238,7 @@ class Sticky {
    setPosition(element) {
     this.css(element, { position: '', width: '', top: '', left: '' });
 
-    if ((this.vp.height < element.sticky.rect.height) || !element.sticky.active) {
+    if ((!element.sticky.skipVPHeightCheck && this.vp.height < element.sticky.rect.height) || !element.sticky.active) {
       return;
     }
 

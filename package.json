@@ -1,5 +1,5 @@
 {
-  "name": "sticky-js",
+  "name": "stickyjs",
   "version": "1.3.0",
   "description": "Sticky elements",
   "main": "index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rgalus/sticky-js.git"
+    "url": "git+https://github.com/thantine/sticky-js.git"
   },
   "keywords": [
     "sticky",
@@ -21,9 +21,9 @@
   "author": "rgalus <biuro@rafalgalus.pl>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rgalus/sticky-js/issues"
+    "url": "https://github.com/thantine/sticky-js/issues"
   },
-  "homepage": "https://github.com/rgalus/sticky-js#readme",
+  "homepage": "https://github.com/thantine/sticky-js#readme",
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
